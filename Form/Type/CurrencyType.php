@@ -35,8 +35,10 @@ class CurrencyType
     {
         $choiceList = array();
         foreach ($options["currency_choices"] as $currencyCode) {
-            $choiceList[$currencyCode] = $currencyCode;
+            $symbol= Intl::getCurrencyBundle()->getCurrencySymbol($currencyCode);
+            $choiceList[$currencyCode] = $symbol;
         }
+
         $builder->add('tbbc_name', new ChoiceType(), array(
             "choices" => $choiceList,
             "preferred_choices" => array($options["reference_currency"])
